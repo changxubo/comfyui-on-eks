@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: comfyui
+  name: sdwebui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: comfyui
+      app: sdwebui
   template:
     metadata:
       labels:
-        app: comfyui
+        app: sdwebui
     spec:
       volumes:
       - name: stable-diffusion-models
@@ -20,17 +20,29 @@ spec:
         persistentVolumeClaim:
           claimName: comfyui-outputs-pvc # Need to apply sd-outputs-s3.yaml first
       containers:
-      - name: comfyui
-        image: 879660699388.dkr.ecr.ap-southeast-1.amazonaws.com/comfyui-images:latest
+      - name: sdwebui
+        image: 879660699388.dkr.ecr.ap-southeast-1.amazonaws.com/sdwebui-images:latest
         ports:
-        - containerPort: 8848
+        - containerPort: 7860
         volumeMounts:
-        - mountPath: /app/ComfyUI/models
+        - mountPath: /app/SDWebUI/models
           name: stable-diffusion-models
-        - mountPath: /app/ComfyUI/output
+        - mountPath: /app/SDWebUI/output
           name: comfyui-outputs
         resources:
           requests:
             nvidia.com/gpu: 1
           limits:
             nvidia.com/gpu: 1
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 7860            
+          initialDelaySeconds: 90
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 7860            
+          initialDelaySeconds: 120
+          periodSeconds: 10

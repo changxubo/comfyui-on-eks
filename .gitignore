@@ -10,3 +10,5 @@ cdk.context.json
 
 *.swp
 .DS_Store
+
+INSTALL.md
