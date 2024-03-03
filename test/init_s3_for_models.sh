@@ -27,6 +27,8 @@ done
 #curl -L -o ~/comfyui-models/checkpoints/sdxl_lightning_8step.safetensors "https://huggingface.co/ByteDance/SDXL-Lightning/resolve/main/sdxl_lightning_8step.safetensors?download=true"
 #curl -L -o ~/comfyui-models/lora/sdxl_lightning_8step_lora.safetensors "https://huggingface.co/ByteDance/SDXL-Lightning/resolve/main/sdxl_lightning_8step_lora.safetensors?download=true"
 
+curl -L -o ~/comfyui-models/checkpoints/thinkdiffusionxl.Fowd.safetensors "https://civitai-delivery-worker-prod.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/model/2087867/thinkdiffusionxl.Fowd.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22thinkdiffusionxl_v10.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e01358d793ad6966166af8b3064953ad/20240303/us-east-1/s3/aws4_request&X-Amz-Date=20240303T124343Z&X-Amz-SignedHeaders=host&X-Amz-Signature=54e17b41b43d55f5f6cd43b03339df8173e5579ade82fa8d29a4d78bc8d0735b"
+curl -L -o ~/comfyui-models/controlnet/control-lora-depth-rank256.safetensors "https://huggingface.co/stabilityai/control-lora/resolve/main/control-LoRAs-rank256/control-lora-depth-rank256.safetensors?download=true"
 
 aws s3 sync ~/comfyui-models s3://$bucket/ --region $region
 rm -rf ~/comfyui-models
